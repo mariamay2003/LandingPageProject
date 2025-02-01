@@ -1,23 +1,28 @@
-/*
- *
- * CSS written based on SMACSS architecture.
- * To learn more, visit: http://smacss.com/
- * 
- * For simplicity, no reset or normalize is added. 
- * To learn more, visit: https://css-tricks.com/reboot-resets-reasoning/
- *
-*/
-
-
 /* ---- Base Rules ---- */
 body {
-    background: rgb(136,203,171);
-    background: linear-gradient(0deg, rgba(136,203,171,1) 0%, rgba(0,13,60,1) 100%);
+    background: rgb(136, 203, 171);
+    background: linear-gradient(0deg, rgba(136, 203, 171, 1) 0%, rgba(0, 13, 60, 1) 100%);
     margin: 0;
     font-family: 'Merriweather', serif;
     color: #fff;
 }
 
+/* Change styles when scrolling over the elements */
+section {
+    opacity: 0;
+    /* Initially, the section is invisible */
+    transform: translateY(100px);
+    /* The elements are positioned lower */
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    /* Transition for opacity and transform properties */
+}
+
+section.your-active-class {
+    opacity: 1;
+    /* Becomes visible when scrolled into view */
+    transform: translateY(0);
+    /* Moves up to its original position */
+}
 
 /* Typeography General*/
 h1 {
@@ -26,7 +31,7 @@ h1 {
     margin: 2em 1rem;
 }
 
-@media only screen and (min-width: 35em){
+@media only screen and (min-width: 35em) {
     h1 {
         font-size: 7em;
         margin: 2em 4rem 1em;
@@ -80,6 +85,7 @@ section {
     font-weight: bold;
     text-decoration: none;
     color: #000;
+    cursor: pointer;
 }
 
 .navbar__menu .menu__link:hover {
@@ -104,7 +110,7 @@ section {
     color: #fff;
 }
 
-.page__footer p{
+.page__footer p {
     color: #fff;
 }
 
@@ -116,7 +122,7 @@ section {
     text-align: left;
 }
 
-@media only screen and (min-width: 35em){
+@media only screen and (min-width: 35em) {
     .landing__container {
         max-width: 50em;
         padding: 4em;
@@ -126,7 +132,7 @@ section {
 section:nth-of-type(even) .landing__container {
     margin-right: 0;
     margin-left: auto;
-    text-align: right; 
+    text-align: right;
 }
 
 /* Background Circles */
@@ -146,8 +152,8 @@ section:nth-of-type(odd) .landing__container::before {
 
 section:nth-of-type(even) .landing__container::before {
     content: '';
-    background: rgb(255,255,255);
-    background: linear-gradient(0deg, rgba(255,255,255,.1) 0%, rgba(255,255,255,.2) 100%);
+    background: rgb(255, 255, 255);
+    background: linear-gradient(0deg, rgba(255, 255, 255, .1) 0%, rgba(255, 255, 255, .2) 100%);
     position: absolute;
     top: 3em;
     right: 3em;
@@ -161,8 +167,8 @@ section:nth-of-type(even) .landing__container::before {
 
 section:nth-of-type(3n) .landing__container::after {
     content: '';
-    background: rgb(255,255,255);
-    background: linear-gradient(0deg, rgba(255,255,255,.1) 0%, rgba(255,255,255,.2) 100%);
+    background: rgb(255, 255, 255);
+    background: linear-gradient(0deg, rgba(255, 255, 255, .1) 0%, rgba(255, 255, 255, .2) 100%);
     position: absolute;
     right: 0;
     bottom: 0;
@@ -176,8 +182,8 @@ section:nth-of-type(3n) .landing__container::after {
 
 section:nth-of-type(3n + 1) .landing__container::after {
     content: '';
-    background: rgb(255,255,255);
-    background: linear-gradient(0deg, rgba(255,255,255,.1) 0%, rgba(255,255,255,.2) 100%);
+    background: rgb(255, 255, 255);
+    background: linear-gradient(0deg, rgba(255, 255, 255, .1) 0%, rgba(255, 255, 255, .2) 100%);
     position: absolute;
     right: 20vw;
     bottom: -5em;
@@ -188,7 +194,6 @@ section:nth-of-type(3n + 1) .landing__container::after {
     opacity: 0;
     transition: ease 0.5s all;
 }
-
 
 /* ---- Theme State Rules ---- */
 /* Section Active Styles */
@@ -208,16 +213,91 @@ section.your-active-class .landing__container::after {
     animation: rotate 5s linear 0s infinite forwards reverse;
 }
 
+.page__header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    transition: top 0.3s ease;
+    /* إضافة تأثير الانتقال عند الاختفاء */
+}
+
+
 /* Section Active Styles Keyframe Animations */
 @keyframes rotate {
-	from {
-		transform: rotate(0deg)
-		           translate(-1em)
-		           rotate(0deg);
-	}
-	to {
-		transform: rotate(360deg)
-		           translate(-1em) 
-		           rotate(-360deg);
-	}
+    from {
+        transform: rotate(0deg) translate(-1em) rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg) translate(-1em) rotate(-360deg);
+    }
+}
+
+@media only screen and (max-width: 768px) {
+
+    /* Reduce font size for mobile */
+    h1 {
+        font-size: 2.5rem;
+        margin-top: 20rem;
+        text-align: center;
+    }
+
+    /* Adjust margins for the main content */
+    main {
+        margin: 5vh 1em 5vh;
+        /* Reduce margins to fit mobile screen */
+    }
+
+    /* Adjust the height of sections */
+    section {
+        height: fit-content;
+        width: 100%;
+        /* Make section height smaller for mobile */
+    }
+
+    /* Adjust the width and padding of containers */
+    .landing__container {
+        padding-top: 16em;
+        max-width: 100%;
+        /* Ensure container width fits mobile screen */
+    }
+
+    .navbar__menu li {
+        display: block;
+        /* Arrange the menu items vertically */
+        width: 100%;
+        /* Make each item take up the full width */
+    }
+
+    .navbar__menu .menu__link {
+        text-align: center;
+        /* Center align the links */
+        padding: 1em;
+        /* Adjust padding for better spacing */
+    }
+
+    /* Adjust design of elements inside sections */
+    section:nth-of-type(odd) .landing__container::before {
+        width: 15vh;
+        /* Adjust size of background circle for odd sections */
+        height: 15vh;
+        opacity: 0.4;
+        /* Reduce opacity for mobile */
+    }
+
+    section:nth-of-type(even) .landing__container::before {
+        width: 12vh;
+        /* Adjust size of background circle for even sections */
+        height: 12vh;
+        opacity: 0.4;
+        /* Reduce opacity for mobile */
+    }
+
+    section:nth-of-type(3n) .landing__container::after {
+        width: 12vh;
+        /* Adjust size of background circle for third sections */
+        height: 12vh;
+        opacity: 0.4;
+        /* Reduce opacity for mobile */
+    }
 }
