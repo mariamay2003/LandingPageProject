@@ -43,6 +43,7 @@ h2 {
     font-family: 'Oxygen', Sans-Serif;
     font-size: 3em;
     color: #fff;
+    margin-top: 10rem;
 }
 
 p {
@@ -219,6 +220,13 @@ section.your-active-class .landing__container::after {
     width: 100%;
     transition: top 0.3s ease;
     /* إضافة تأثير الانتقال عند الاختفاء */
+}
+
+.menu__link.active {
+    background-color: black;
+    color: white;
+    transition: background-color 0.3s, color 0.3s;
+    /* إضافة تأثير سلس */
 }
 
 
